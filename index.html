@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Controle de Royalties KDP — planilha para autores independentes | Rudger Couto</title>
+  <meta name="description" content="Organize vendas, páginas lidas (KENP) e royalties em reais, no Excel e no Google Planilhas. Planilha de Controle de Royalties KDP, de Rudger Couto. R$ 27,00. Não é um produto oficial da Amazon.">
+  <meta name="author" content="Rudger Couto">
+  <meta property="og:title" content="Controle de Royalties KDP — planilha para autores independentes">
+  <meta property="og:description" content="Organize vendas, páginas lidas (KENP) e royalties em reais, no Excel e no Google Planilhas. R$ 27,00.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="capa-kiwify-1280x720.png">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2312243a'/%3E%3Crect x='6' y='6' width='52' height='52' rx='6' fill='none' stroke='%23c4a35a' stroke-width='3'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='22' font-family='Georgia,serif' fill='%23f6f0e4'%3ER%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #12243a;
+      --navy-deep: #0b1730;
+      --navy-mid: #18304a;
+      --navy-soft: #1e3a56;
+      --gold: #c4a35a;
+      --gold-soft: #d4bc7a;
+      --gold-deep: #9a7a32;
+      --cream: #f6f0e4;
+      --cream-dim: #e8dfcc;
+      --ink: #1c2430;
+      --muted: #5c6572;
+      --paper: #f7f5f1;
+      --card: #ffffff;
+      --line: #e4ddd0;
+      --ok: #2d6a4f;
+      --shadow: 0 18px 50px rgba(11, 23, 48, 0.18);
+      --radius: 16px;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.65;
+      font-size: 1.0625rem;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--gold-deep); }
+    .skip {
+      position: absolute;
+      left: -999px;
+      top: 0;
+      background: var(--gold);
+      color: var(--navy-deep);
+      padding: 0.5rem 1rem;
+      z-index: 100;
+    }
+    .skip:focus { left: 1rem; top: 1rem; }
+    /* ========== header ========== */
+    .topbar {
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-soft), var(--gold-deep));
+    }
+    header.site {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(11, 23, 48, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(196, 163, 90, 0.25);
+    }
+    .nav {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand {
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .brand small {
+      font-weight: 400;
+      color: var(--gold-soft);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    nav.anchors {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+    nav.anchors a {
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    nav.anchors a:hover { color: var(--gold-soft); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      background: var(--gold);
+      color: var(--navy-deep);
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.75rem 1.35rem;
+      border: 2px solid var(--gold);
+      letter-spacing: 0.01em;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 6px 16px rgba(196, 163, 90, 0.25);
+    }
+    .btn:hover {
+      background: var(--gold-soft);
+      border-color: var(--gold-soft);
+      color: var(--navy-deep);
+      transform: translateY(-1px);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--cream);
+      border-color: rgba(196, 163, 90, 0.55);
+      box-shadow: none;
+    }
+    .btn-ghost:hover {
+      background: rgba(196, 163, 90, 0.12);
+      color: var(--cream);
+      border-color: var(--gold);
+    }
+    .btn-lg { padding: 0.95rem 1.7rem; font-size: 1.05rem; }
+    /* ========== hero ========== */
+    .hero {
+      background:
+        linear-gradient(180deg, rgba(11,23,48,0.15), rgba(11,23,48,0.55)),
+        var(--navy-deep);
+      background-color: var(--navy-deep);
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(196,163,90,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(196,163,90,0.06) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(ellipse at 30% 40%, #000 20%, transparent 75%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 3.2rem 1.25rem 3.6rem;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 2.5rem;
+      align-items: center;
+      position: relative;
+    }
+    .eyebrow {
+      display: inline-block;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 0.35rem;
+      margin-bottom: 1.1rem;
+    }
+    h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 600;
+      font-size: clamp(2.15rem, 4.6vw, 3.55rem);
+      line-height: 1.12;
+      margin: 0 0 1rem;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+    }
+    .lead {
+      font-size: 1.2rem;
+      color: var(--cream-dim);
+      margin: 0 0 1.35rem;
+      max-width: 34rem;
+    }
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin: 0 0 1.6rem;
+    }
+    .pills span {
+      border: 1px solid rgba(196, 163, 90, 0.7);
+      color: var(--cream);
+      border-radius: 999px;
+      padding: 0.22rem 0.7rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.25rem; }
+    .price-inline {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+    .price-inline strong {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.85rem;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .price-inline span { font-size: 0.85rem; color: var(--cream-dim); }
+    .fine {
+      margin: 1.25rem 0 0;
+      font-size: 0.92rem;
+      color: #c9c3b6;
+      max-width: 32rem;
+    }
+    .legal-mini {
+      margin: 1.5rem 0 0;
+      font-size: 0.8rem;
+      color: #8b93a0;
+    }
+    .hero-art {
+      border: 2px solid var(--gold);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+      background: var(--navy);
+    }
+    .hero-art img { width: 100%; }
+    /* ========== sections ========== */
+    section { padding: 4rem 1.25rem; }
+    .wrap { max-width: var(--max); margin: 0 auto; }
+    h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(1.7rem, 3vw, 2.25rem);
+      line-height: 1.2;
+      margin: 0 0 0.6rem;
+      color: var(--navy);
+      font-weight: 600;
+    }
+    .section-lead {
+      color: var(--muted);
+      margin: 0 0 2rem;
+      max-width: 40rem;
+      font-size: 1.08rem;
+    }
+    .mockup-sec { background: #eef1f6; }
+    figure.mockup {
+      margin: 0;
+      background: var(--card);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid #e1e6ee;
+    }
+    figure.mockup img { width: 100%; }
+    figcaption {
+      padding: 0.9rem 1.15rem 1.1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      background: #fff;
+      border-top: 1px solid var(--line);
+    }
+    .grid-3, .grid-2, .grid-benefits {
+      display: grid;
+      gap: 1rem;
+    }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .grid-benefits { grid-template-columns: repeat(2, 1fr); }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.3rem 1.3rem;
+    }
+    .card h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1.08rem;
+      color: var(--navy);
+    }
+    .card p { margin: 0; color: #3d4654; }
+    .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--navy);
+      color: var(--gold);
+      display: grid;
+      place-items: center;
+      margin-bottom: 0.8rem;
+    }
+    .icon svg { width: 18px; height: 18px; }
+    .dores { background: var(--paper); }
+    .dores .card {
+      border-top: 3px solid var(--gold);
+    }
+    .abas {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.7rem;
+    }
+    .abas li {
+      background: var(--navy);
+      color: var(--cream);
+      border-radius: 12px;
+      padding: 1rem 0.9rem;
+      font-weight: 600;
+      border: 1px solid rgba(196,163,90,0.35);
+      text-align: center;
+    }
+    .abas li span {
+      display: block;
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: var(--gold-soft);
+      margin-top: 0.2rem;
+    }
+    .split .card.dark {
+      background: var(--navy);
+      color: var(--cream);
+      border-color: var(--navy);
+    }
+    .split .card.dark h3 { color: var(--gold); }
+    .split .card.dark p, .split .card.dark li { color: var(--cream-dim); }
+    .split ul { margin: 0.6rem 0 0; padding-left: 1.15rem; }
+    .split li { margin: 0.35rem 0; }
+    .inclui { background: #fff; }
+    .extra {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    .note {
+      margin: 1.25rem 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    /* ========== price ========== */
+    .comprar {
+      background:
+        linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+      color: var(--cream);
+    }
+    .comprar h2 { color: var(--cream); }
+    .price-box {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2rem;
+      align-items: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(196,163,90,0.4);
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
+    }
+    .price-tag {
+      text-align: left;
+      min-width: 11rem;
+    }
+    .price-tag .label {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin: 0 0 0.35rem;
+    }
+    .price-tag .value {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 3.1rem;
+      line-height: 1;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .price-tag .once {
+      margin: 0.45rem 0 0;
+      color: var(--cream-dim);
+      font-size: 0.95rem;
+    }
+    .price-copy p { margin: 0 0 1rem; color: var(--cream-dim); }
+    /* ========== faq ========== */
+    .faq { background: var(--paper); }
+    details {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.2rem 1rem;
+      margin: 0 0 0.65rem;
+    }
+    details[open] { border-color: #d7c9a4; }
+    summary {
+      cursor: pointer;
+      font-weight: 650;
+      padding: 0.9rem 0;
+      color: var(--navy);
+      list-style: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "+";
+      float: right;
+      color: var(--gold-deep);
+      font-weight: 500;
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+    details[open] summary::after { content: "–"; }
+    details p { margin: 0 0 1rem; color: #3d4654; }
+    /* ========== footer ========== */
+    footer.site {
+      background: var(--navy-deep);
+      color: #b7b3a8;
+      padding: 2.4rem 1.25rem 2.6rem;
+      font-size: 0.92rem;
+    }
+    footer.site .wrap { display: grid; gap: 1rem; }
+    footer.site strong { color: var(--cream); }
+    footer.site p { margin: 0; }
+    .author { color: var(--gold-soft); font-weight: 600; }
+    /* ========== responsive ========== */
+    @media (max-width: 880px) {
+      .hero-inner, .grid-3, .grid-2, .grid-benefits, .abas, .extra, .price-box {
+        grid-template-columns: 1fr;
+      }
+      .abas { grid-template-columns: 1fr 1fr; }
+      nav.anchors a.hide-sm { display: none; }
+      section { padding: 3rem 1.15rem; }
+      .price-tag .value { font-size: 2.6rem; }
+    }
+    @media (max-width: 520px) {
+      .abas { grid-template-columns: 1fr; }
+      .nav .btn { padding: 0.6rem 0.95rem; font-size: 0.92rem; }
+    }
+  </style>
+</head>
+<body>
+  <!--
+    ============================================================
+    LINK DE CHECKOUT DA KIWIFY — TROQUE AQUI DEPOIS
+    ------------------------------------------------------------
+    Quando o checkout da Kiwify existir, substitua o href="#comprar"
+    de TODOS os links com a classe "btn-checkout" (incluindo o
+    botão principal com id="checkout") pelo URL de pagamento.
+    Há 3 botões iguais: no menu, no herói e na seção de preço.
+    Busque neste arquivo por:  class="btn btn-checkout"
+    ou por:  href="#comprar"
+    Não altere o id="checkout" — ele serve de âncora estável.
+    ============================================================
+  -->
+  <a class="skip" href="#conteudo">Ir para o conteúdo</a>
+  <div class="topbar"></div>
+  <header class="site">
+    <div class="nav">
+      <a class="brand" href="#topo">
+        <small>Rudger Couto</small>
+        Controle de Royalties KDP
+      </a>
+      <nav class="anchors" aria-label="Seções">
+        <a class="hide-sm" href="#beneficios">Benefícios</a>
+        <a class="hide-sm" href="#pacote">O que você recebe</a>
+        <a class="hide-sm" href="#faq">Perguntas</a>
+        <a class="btn btn-checkout" href="#comprar">Quero a planilha</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="topo">
+    <section class="hero" aria-labelledby="titulo-hero">
+      <div class="hero-inner">
+        <div>
+          <p class="eyebrow">Produto digital</p>
+          <h1 id="titulo-hero">Controle de Royalties KDP</h1>
+          <p class="lead">Organize vendas, páginas lidas (KENP) e royalties em reais, no Excel e no Google Planilhas.</p>
+          <div class="pills" aria-label="Recursos">
+            <span>eBook</span>
+            <span>Brochura</span>
+            <span>Capa dura</span>
+            <span>KENP / KU</span>
+            <span>Valores em R$</span>
+          </div>
+          <div class="hero-cta">
+            <a id="checkout" class="btn btn-lg btn-checkout" href="#comprar">Quero a planilha</a>
+            <div class="price-inline">
+              <strong>R$ 27,00</strong>
+              <span>pagamento único · sem mensalidade</span>
+            </div>
+          </div>
+          <p class="fine">Você recebe o arquivo na hora, preenche com os seus relatórios do KDP e passa a ver o mês em um só lugar. Sem promessa de faturamento.</p>
+          <p class="legal-mini">Não é um produto oficial da Amazon. Amazon, Kindle, KDP e Kindle Direct Publishing são marcas de seus respectivos titulares.</p>
+        </div>
+        <div class="hero-art">
+          <img src="capa-kiwify-1280x720.png" width="1280" height="720" alt="Capa da Planilha de Controle de Royalties KDP, de Rudger Couto, com um painel ilustrativo de totais em reais, unidades e páginas lidas.">
+        </div>
+      </div>
+    </section>
+
+    <section class="mockup-sec" id="conteudo" aria-labelledby="titulo-mockup">
+      <div class="wrap">
+        <h2 id="titulo-mockup">Um painel para ver o mês em reais</h2>
+        <p class="section-lead">A planilha reúne totais por mês, por livro e por marketplace, com gráficos e um top 5 do ano. A imagem abaixo é um mockup com dados de demonstração.</p>
+        <figure class="mockup">
+          <img src="mockup-planilha-1280x720.png" width="1280" height="720" alt="Mockup da aba Dashboard da planilha, com cartões de totais, uma tabela mensal e um gráfico. Os valores exibidos são apenas de exemplo e não representam vendas reais.">
+          <figcaption>Mockup da aba Dashboard. Os números que aparecem na imagem (por exemplo, totais em reais, unidades e KENP) são dados de exemplo, só para demonstração — não são resultados reais de vendas e devem ser apagados antes de usar a planilha.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="dores" id="dores" aria-labelledby="titulo-dores">
+      <div class="wrap">
+        <h2 id="titulo-dores">O que costuma complicar o controle</h2>
+        <p class="section-lead">Os relatórios do KDP vêm em várias lojas e moedas. No fim do mês, fica difícil responder: quanto eu realmente recebi, em reais?</p>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Lojas e moedas misturadas</h3>
+            <p>Quem publica na Amazon.com, na Amazon.com.br e em outras lojas precisa converter USD, EUR ou GBP para BRL na mão, sempre com medo de usar a taxa errada.</p>
+          </article>
+          <article class="card">
+            <h3>Vendas e KENP soltos</h3>
+            <p>eBook, brochura e capa dura se misturam com páginas lidas no Kindle Unlimited (KENP), e o controle acaba em anotações espalhadas.</p>
+          </article>
+          <article class="card">
+            <h3>Planilha genérica não serve</h3>
+            <p>Planilhas comuns de finanças não foram feitas para ASIN, marketplace, KENP e royalty por moeda — e some a noção de evolução mensal e de qual livro rende mais.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios" aria-labelledby="titulo-beneficios">
+      <div class="wrap">
+        <h2 id="titulo-beneficios">O que a planilha organiza para você</h2>
+        <p class="section-lead">Você lança os números dos seus relatórios. A planilha converte, totaliza e mostra o painel — com a taxa de câmbio que você informa.</p>
+        <div class="grid-benefits">
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5h16v14H4z"/><path d="M4 9h16M9 5v14"/></svg>
+            </div>
+            <h3>Tudo em reais, com a sua taxa</h3>
+            <p>Lance o mês, o livro e a loja: a planilha converte o royalty para reais com a taxa que você informa. As cotações vêm vazias de propósito, para você colar a do Banco Central ou a do pagamento da Amazon.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V9l4 4 4-8 4 6 4-4v12H4z"/></svg>
+            </div>
+            <h3>Totais, gráficos e top 5</h3>
+            <p>Veja totais por mês, por livro e por marketplace, com gráficos de barras e de linha e um top 5 do ano — para acompanhar a evolução sem montar o painel do zero.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h9l5 5v11H5V4z"/><path d="M14 4v5h5"/></svg>
+            </div>
+            <h3>eBook, brochura e capa dura</h3>
+            <p>Cadastre os três formatos e acompanhe unidades vendidas e páginas KENP no mesmo lugar. Se o mesmo título existir em mais de um formato, use uma linha para cada um.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+            </div>
+            <h3>Meta e reserva de imposto, editáveis</h3>
+            <p>Defina uma meta mensal e um percentual estimado para reservar impostos (carnê-leão / IRPF). O percentual é seu: não há alíquota inventada nem cálculo oficial.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16v12H4z"/><path d="M8 7V5h8v2"/><path d="M8 12h8"/></svg>
+            </div>
+            <h3>Excel e Google Planilhas</h3>
+            <p>O mesmo arquivo .xlsx funciona nos dois. A aba Instruções traz o passo a passo de importação no Google Planilhas.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12l4 4 10-10"/></svg>
+            </div>
+            <h3>Pronta para começar</h3>
+            <p>Já vem com listas suspensas, cabeçalhos formatados, painéis congelados e um guia na primeira aba. Os exemplos vêm marcados em destaque e são fáceis de apagar.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="inclui" id="pacote" aria-labelledby="titulo-pacote">
+      <div class="wrap">
+        <h2 id="titulo-pacote">O que você recebe</h2>
+        <p class="section-lead">Um arquivo .xlsx, com guia de uso dentro da própria planilha — inclusive como importar no Google Planilhas e como apagar os dados de exemplo.</p>
+        <ul class="abas">
+          <li>Instruções<span>guia de uso</span></li>
+          <li>Cadastro de Livros<span>título, ASIN, formato</span></li>
+          <li>Vendas Mensais<span>unidades e KENP</span></li>
+          <li>Câmbio<span>você informa a taxa</span></li>
+          <li>Dashboard<span>totais e gráficos</span></li>
+          <li>Metas e Impostos<span>reserva editável</span></li>
+          <li>Listas<span>listas suspensas</span></li>
+        </ul>
+        <p class="note">Capacidade prevista: até 200 livros e 1.000 lançamentos de vendas, com fórmulas já copiadas nessas linhas.</p>
+
+        <h2 style="margin-top:2.6rem">Já incluído no mesmo arquivo</h2>
+        <p class="section-lead">Não é um arquivo extra: estes itens já estão na planilha.</p>
+        <div class="extra">
+          <article class="card">
+            <h3>Metas e Impostos</h3>
+            <p>Reserva percentual editável e acompanhamento da meta mês a mês.</p>
+          </article>
+          <article class="card">
+            <h3>Google Planilhas</h3>
+            <p>Compatível no mesmo .xlsx, com passo a passo de importação na aba Instruções.</p>
+          </article>
+          <article class="card">
+            <h3>Checklist mensal</h3>
+            <p>Checklist de fechamento e avisos de uso, também na aba Instruções.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="split" id="para-quem" aria-labelledby="titulo-para">
+      <div class="wrap">
+        <div class="grid-2">
+          <article class="card">
+            <h3 id="titulo-para">Para quem é</h3>
+            <ul>
+              <li>Autoras e autores independentes que publicam no Amazon KDP e querem um controle simples em português do Brasil.</li>
+              <li>Quem vende em mais de um formato (eBook, brochura, capa dura) ou em mais de um marketplace.</li>
+              <li>Quem recebe parte dos royalties em moeda estrangeira e precisa ver o total em R$.</li>
+              <li>Quem está começando e prefere uma planilha pronta a montar uma do zero.</li>
+            </ul>
+          </article>
+          <article class="card dark">
+            <h3>O que esta planilha não faz</h3>
+            <ul>
+              <li>Não acessa a sua conta KDP e não importa relatórios automaticamente.</li>
+              <li>Não é um software de contabilidade e não gera declaração de imposto de renda.</li>
+              <li>Não calcula carnê-leão, IRPF ou qualquer tributo oficial — só aplica o percentual que você digitar, como reserva pessoal.</li>
+              <li>Não substitui os relatórios da Amazon nem a orientação de um contador.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="comprar" id="comprar" aria-labelledby="titulo-comprar">
+      <div class="wrap">
+        <div class="price-box">
+          <div class="price-tag">
+            <p class="label">Pagamento único</p>
+            <div class="value">R$ 27,00</div>
+            <p class="once">Sem mensalidade</p>
+          </div>
+          <div class="price-copy">
+            <h2 id="titulo-comprar">Quero organizar meus royalties em reais</h2>
+            <p>Você recebe o arquivo na hora, preenche com os seus relatórios do KDP e passa a ver o mês em um só lugar. Sem promessa de faturamento.</p>
+            <a class="btn btn-lg btn-checkout" href="#comprar">Quero a planilha</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq" aria-labelledby="titulo-faq">
+      <div class="wrap">
+        <h2 id="titulo-faq">Perguntas frequentes</h2>
+        <p class="section-lead">Respostas diretas, sem promessa de resultado.</p>
+
+        <details>
+          <summary>Preciso saber Excel para usar a planilha?</summary>
+          <p>Não precisa ser avançado. Você cadastra os livros, lança os números do mês e a planilha calcula o restante (conversão para reais, totais e gráficos). Há listas suspensas e um guia na aba Instruções. Se souber entrar em uma célula e apagar uma linha de exemplo, já consegue começar.</p>
+        </details>
+        <details>
+          <summary>Funciona no Google Planilhas?</summary>
+          <p>Sim. O mesmo arquivo .xlsx é a versão compatível. No Google Drive, envie o arquivo e abra com o Google Planilhas; ou, no Planilhas, use Arquivo → Importar. O passo a passo está na aba Instruções. Depois de importar, confira as listas suspensas e os gráficos: eles costumam vir junto, mas às vezes pedem um ajuste fino de tamanho ou cor.</p>
+        </details>
+        <details>
+          <summary>Funciona no celular?</summary>
+          <p>Você pode abrir o arquivo no aplicativo do Excel ou do Google Planilhas. Para cadastrar livros e lançar o mês, a tela do computador é mais confortável. O preenchimento no celular é possível, mas não é o uso ideal.</p>
+        </details>
+        <details>
+          <summary>Serve para eBook, brochura e capa dura?</summary>
+          <p>Sim. No cadastro há lista suspensa com os três formatos. Se o mesmo título existir em mais de um formato, cadastre uma linha para cada um, com nomes que os diferenciem (por exemplo, “Minha Obra (eBook)” e “Minha Obra (Brochura)”), para o Dashboard não misturar os totais.</p>
+        </details>
+        <details>
+          <summary>A planilha calcula o imposto que eu realmente devo pagar?</summary>
+          <p>Não. A aba Metas e Impostos só aplica o percentual que você mesmo digitar, como uma reserva pessoal. Ela não calcula carnê-leão, IRPF ou qualquer tributo oficial, nem escolhe faixa da tabela progressiva. Regras e alíquotas mudam, e o seu caso pode ser específico. Consulte um contador. A planilha é uma ferramenta de organização, não aconselhamento fiscal.</p>
+        </details>
+        <details>
+          <summary>As taxas de câmbio já vêm preenchidas?</summary>
+          <p>Não, de propósito. USD, EUR, GBP e as demais moedas estrangeiras ficam vazias para você colar a cotação do período (por exemplo, a do Banco Central ou a informada no pagamento ou no relatório da Amazon). Só o real vem com taxa 1, porque 1 BRL = 1 BRL. Enquanto a taxa de uma moeda estiver vazia, o valor em reais daquela linha permanece em branco.</p>
+        </details>
+        <details>
+          <summary>Posso cadastrar vários livros e várias lojas da Amazon?</summary>
+          <p>Sim. Há espaço para até 200 livros e 1.000 lançamentos de vendas, com fórmulas já prontas nessas linhas. As listas incluem Amazon.com.br, Amazon.com, lojas da Europa, Japão, Canadá, México, Austrália, Índia e a opção “Outro”. Você também pode acrescentar moedas na aba Câmbio.</p>
+        </details>
+        <details>
+          <summary>Como eu recebo o arquivo depois da compra?</summary>
+          <p>Pela própria Kiwify, após o pagamento aprovado, como arquivo para download (planilha .xlsx). Guarde uma cópia. Esta versão é a 1.0 (novembro de 2026).</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <p><strong>Planilha de Controle de Royalties KDP</strong> · <span class="author">Rudger Couto</span></p>
+      <p>Não é um produto oficial da Amazon, do Kindle ou do KDP. Amazon, Kindle, KDP e Kindle Direct Publishing são marcas de seus respectivos titulares.</p>
+      <p>A planilha não calcula imposto oficial e não substitui orientação de um contador. As taxas de câmbio são preenchidas por você; não vêm prontas com cotações inventadas.</p>
+    </div>
+  </footer>
+</body>
+</html>
